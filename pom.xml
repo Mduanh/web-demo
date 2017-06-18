@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>info.duanlang</groupId>
+    <artifactId>web-demo</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>wd-web</module>
+        <module>wd-service</module>
+        <module>wd-common</module>
+        <module>wd-aliyunoss</module>
+        <module>wd-cache</module>
+        <module>wd-security</module>
+    </modules>
+    <properties>
+        <spring.version>4.3.5.RELEASE</spring.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mapper.version>3.3.9</mapper.version>
+        <mysql.version>5.1.40</mysql.version>
+        <mybatis.version>3.4.1</mybatis.version>
+        <slf4j.version>1.7.7</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
+        <springframework.version>4.3.5.RELEASE</springframework.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <jdk.version>1.8</jdk.version>
+    </properties>
+    <dependencies>
+        <!-- For log4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+    </dependencies>
+    <profiles>
+        <profile>
+            <id>DEVELOP</id> <!-- 开发环境，默认 -->
+            <properties>
+                <env>develop</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>TEST</id> <!-- 性能测试环境 -->
+            <properties>
+                <env>test</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>DEV-153</id> <!-- 153 -->
+            <properties>
+                <env>dev-153</env>
+            </properties>
+
+        </profile>
+        <profile>
+            <id>PROD</id> <!-- 生产环境 -->
+            <properties>
+                <env>production</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>PR</id> <!-- pr 预发布环境 -->
+            <properties>
+                <env>pr</env>
+            </properties>
+        </profile>
+    </profiles>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <target>1.8</target>
+                        <source>1.8</source>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

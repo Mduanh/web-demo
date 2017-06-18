@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<context id="MysqlContext" targetRuntime="MyBatis3Simple"
+		defaultModelType="flat"><!--该模型为每一张表只生成一个实体类。这个实体类包含表中的所有字段。一般使用这个模型就够了。-->
+
+		<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+			<property name="mappers" value="info.duanlang.base.extend.CommonMapper" />
+			<!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+			<property name="caseSensitive" value="true" />
+		</plugin>
+
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" 
+			connectionURL="jdbc:mysql://localhost:3306/web_demo"
+			userId="root" password="123456">
+		</jdbcConnection>
+
+		<javaModelGenerator targetPackage="info.duanlang.user.entry"
+			targetProject="src\main\java">
+			<property name="constructorBased" value="true" /><!--自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter-->
+			<property name="rootClass" value="info.duanlang.base.bean.BasicBean" />
+			<property name="trimStrings" value="true" /><!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
+		</javaModelGenerator>
+
+		<!--生成SQL map的XML文件生成器-->
+		<sqlMapGenerator targetPackage="module.service.mappings.user"
+			targetProject="src\main\resources" />
+
+		<!--对于mybatis来说，即生成Mapper接口，注意，如果没有配置该元素，那么默认不会生成Mapper接口-->
+		<javaClientGenerator targetPackage="info.duanlang.user.mapper"
+			targetProject="src\main\java" type="XMLMAPPER">
+		</javaClientGenerator>
+
+		<table tableName="wd_user"
+			domainObjectName="User">
+		</table>
+		<!-- <table tableName="%"> </table> -->
+		<!-- <table tableName="mcm_product_template" domainObjectName="ProductTemplate"> 
+			<columnOverride property="orderStatus" column="order_status_id" javaType="com.ouryue.order.enumeration.OrderStatusEnum" 
+			typeHandler="com.ouryue.base.typehandler.CommonEnumTypeHandler"></columnOverride> 
+			</table> -->
+	</context>
+</generatorConfiguration>
